@@ -1,10 +1,11 @@
 require './GameObject.rb'
 require './keypress.rb'
 require 'timeout'
+require './RTermGame.rb'
 
 class PlayerObject < GameObject
   def start
-    puts "Player Initilized"
+    RTermGame.println "Player Initilized"
   end
 
   def update
@@ -14,7 +15,7 @@ class PlayerObject < GameObject
 
 
     if(keke)
-      puts "A pressed"
+      RTermGame.println "A pressed"
     end
   end
 

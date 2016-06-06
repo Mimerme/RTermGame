@@ -3,6 +3,7 @@
 
 #Graphics object
 require './RenderFactory.rb'
+require './RTermGame.rb'
 
 class TerminalGame
 
@@ -42,10 +43,6 @@ class TerminalGame
      #Pause each frame. Modern computers render too fast
      sleep 0.1
 
-     @logic_bits_update.each do |id, logic_bit|
-       logic_bit.call
-     end
-
      @gameobjects.each do |id, gameobject|
        gameobject.update
      end
@@ -54,6 +51,10 @@ class TerminalGame
 
      @gameobjects.each do |id, gameobject|
        @graphics_factory.buffer_at_position(gameobject.get_x, gameobject.get_y, gameobject.get_sprite)
+     end
+
+     @logic_bits_update.each do |id, logic_bit|
+       logic_bit.call
      end
 
      @graphics_factory.draw

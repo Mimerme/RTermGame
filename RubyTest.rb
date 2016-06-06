@@ -9,8 +9,10 @@ require 'timeout'
 require 'io/console'
 require 'curses'
 require './keypress.rb'
+require './RTermGame.rb'
 
-#test_lambda = ->(test_value) {puts "Hello #{test_value}"}
+
+#test_lambda = ->(test_value) {RTermGame.println "Hello #{test_value}"}
 
 #test_lambda["meme"]
 
@@ -20,7 +22,7 @@ require './keypress.rb'
 #Blocks as callbacks
 #def call_block(&block)
 #  block["meme"]
-#  puts "Hello"
+#  RTermGame.println "Hello"
 #end
 
 
@@ -43,10 +45,9 @@ loop do
   sleep (0.1)
 
   if(get_key_pressed "a")
-    puts "a down"
+    RTermGame.println "a down"
   end
-
-  STDOUT.printf "test printf"
+  #STDIN.cooked!
 
   reset_key_record
 

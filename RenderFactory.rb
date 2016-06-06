@@ -1,3 +1,5 @@
+require './RTermGame.rb'
+require './RTermGame.rb'
 
 class RenderFactory
 
@@ -26,7 +28,7 @@ class RenderFactory
           line_buffer << char_sprite
         end
       end
-      puts line_buffer
+      RTermGame.println line_buffer
     end
   end
 end

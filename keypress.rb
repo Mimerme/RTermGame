@@ -1,4 +1,5 @@
 require 'io/console'
+require './RTermGame.rb'
 
 
 #hashmap of current keys down
@@ -10,10 +11,11 @@ require 'io/console'
 #Nonblocking multithreaded cross-platform key-state recording
 def begin_key_record
   Thread.new{
-    loop do
+    loop do      
       char = read_char
-      #puts char
+      #RTermGame.println char
       @key_pressed[char] = char
+
     end
   }
 end
@@ -81,35 +83,35 @@ def show_single_key
 
   case c
   when " "
-    puts "SPACE"
+    RTermGame.println "SPACE"
   when "\t"
-    puts "TAB"
+    RTermGame.println "TAB"
   when "\r"
-    puts "RETURN"
+    RTermGame.println "RETURN"
   when "\n"
-    puts "LINE FEED"
+    RTermGame.println "LINE FEED"
   when "\e"
-    puts "ESCAPE"
+    RTermGame.println "ESCAPE"
   when "\e[A"
-    puts "UP ARROW"
+    RTermGame.println "UP ARROW"
   when "\e[B"
-    puts "DOWN ARROW"
+    RTermGame.println "DOWN ARROW"
   when "\e[C"
-    puts "RIGHT ARROW"
+    RTermGame.println "RIGHT ARROW"
   when "\e[D"
-    puts "LEFT ARROW"
+    RTermGame.println "LEFT ARROW"
   when "\177"
-    puts "BACKSPACE"
+    RTermGame.println "BACKSPACE"
   when "\004"
-    puts "DELETE"
+    RTermGame.println "DELETE"
   when "\e[3~"
-    puts "ALTERNATE DELETE"
+    RTermGame.println "ALTERNATE DELETE"
   when "\u0003"
-    puts "CONTROL-C"
+    RTermGame.println "CONTROL-C"
     exit 0
   when /^.$/
-    puts "SINGLE CHAR HIT: #{c.inspect}"
+    RTermGame.println "SINGLE CHAR HIT: #{c.inspect}"
   else
-    puts "SOMETHING ELSE: #{c.inspect}"
+    RTermGame.println "SOMETHING ELSE: #{c.inspect}"
   end
 end

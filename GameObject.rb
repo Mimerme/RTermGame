@@ -1,3 +1,5 @@
+require './RTermGame.rb'
+
 class GameObject
   def initialize(sprite, position_x, position_y, object_data)
     @sprite = sprite
@@ -7,7 +9,7 @@ class GameObject
   end
 
   def start
-    puts "Starting Gameoject"
+    RTermGame.println "Starting Gameoject"
   end
 
   def update
