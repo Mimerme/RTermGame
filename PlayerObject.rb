@@ -9,13 +9,11 @@ class PlayerObject < GameObject
   end
 
   def update
-    Timeout::timeout(0){
-      keke = get_key('a')
-    }
+    RTermGame.println "lmao"
 
-
-    if(keke)
-      RTermGame.println "A pressed"
+    if(Keyboard.get_key_pressed "a")
+      RTermGame.println "a down"
+      @sprite="a"
     end
   end
 

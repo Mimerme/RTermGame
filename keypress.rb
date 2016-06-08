@@ -3,35 +3,38 @@ require './RTermGame.rb'
 
 
 #hashmap of current keys down
-@key_pressed = {}
-@processed = false
+@@key_pressed = {}
+@@processed = false
 
+class Keyboard
 #Attempt 3
 #---------
 #Nonblocking multithreaded cross-platform key-state recording
-def begin_key_record
+def self.begin_key_record
+
   Thread.new{
-    loop do      
+    loop do
       char = read_char
       #RTermGame.println char
-      @key_pressed[char] = char
+      @@key_pressed[char] = char
 
     end
   }
 end
 
-def get_key_pressed(key)
-  @processed = true
-  return @key_pressed.key? key
+def self.get_key_pressed(key)
+  @@processed = true
+  return @@key_pressed.key? key
 end
 
 #Calls to dump the key_record after a frame. MUST be called after all calls to get keys pressed are finished
-def reset_key_record
+def self.reset_key_record
   #resets keys pressed
-  if @processed
-    @key_pressed.clear
+  if @@processed
+    @@key_pressed.clear
   end
-  @processed = false
+  @@processed = false
+end
 end
 #Attempt 2
 #---------

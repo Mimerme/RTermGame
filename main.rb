@@ -14,16 +14,16 @@ require './RTermGame.rb'
 #Terminal Game only acceptes tile based gameass GameObject
 
 
-meme = GameObject.new("O", 0, 0, nil)
-dope = GameObject.new("I", 1, 0, nil)
-kek = GameObject.new("E", 1, 1, nil)
-#player = PlayerObject.new('U', 2, 2, nil)
+#meme = GameObject.new("O", 0, 0, nil)
+#dope = GameObject.new("I", 1, 0, nil)
+#kek = GameObject.new("E", 1, 1, nil)
+player = PlayerObject.new('U', 2, 2, nil)
 
 tetris = TerminalGame.new(:Tetris, 1, 2)
 
 
-#tetris.add_gameobject(:player, player)
-tetris.add_gameobject(:test, dope)
-tetris.add_gameobject(:pepe, kek)
+tetris.add_gameobject(:player, player)
+#tetris.add_gameobject(:test, dope)
+#tetris.add_gameobject(:pepe, kek)
 
 tetris.begin_loop

@@ -4,6 +4,7 @@
 #Graphics object
 require './RenderFactory.rb'
 require './RTermGame.rb'
+require './keypress.rb'
 
 class TerminalGame
 
@@ -29,19 +30,17 @@ class TerminalGame
 
 
   #Start the game loop
-  def begin_loop
-    @gameobjects.each do |id, gameobject|
-      gameobject.start
-    end
-      @logic_bits_start.each do |id, logic_bit|
-        logic_bit.call
-    end
+ def begin_loop
+   Keyboard.begin_key_record
+   @gameobjects.each do |id, gameobject|
+     gameobject.start
+   end
+     @logic_bits_start.each do |id, logic_bit|
+       logic_bit.call
+   end
+   loop do
+     sleep (0.1)
 
-   #Run and update on every gameobject
-   while true
-
-     #Pause each frame. Modern computers render too fast
-     sleep 0.1
 
      @gameobjects.each do |id, gameobject|
        gameobject.update
@@ -59,7 +58,9 @@ class TerminalGame
 
      @graphics_factory.draw
 
-  end
+     Keyboard.reset_key_record
+
+   end
  end
 
   def get_width

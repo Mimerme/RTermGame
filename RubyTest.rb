@@ -39,16 +39,18 @@ require './RTermGame.rb'
 #may = 0
 #test_ruby.Test_One(lambda {|x| may = 1})
 
-begin_key_record
+Keyboard.begin_key_record
 
 loop do
   sleep (0.1)
 
-  if(get_key_pressed "a")
+  if(Keyboard.get_key_pressed "a")
     RTermGame.println "a down"
   end
+  RTermGame.println "down"
+
   #STDIN.cooked!
 
-  reset_key_record
+  Keyboard.reset_key_record
 
 end
