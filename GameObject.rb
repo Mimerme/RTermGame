@@ -1,15 +1,16 @@
 require './RTermGame.rb'
 
 class GameObject
-  def initialize(sprite, position_x, position_y, object_data)
+  def initialize(sprite, position_x, position_y, object_data, game_world)
     @sprite = sprite
     @x = position_x
     @y = position_y
     @object_data = object_data
+    @game_world = game_world
   end
 
   def start
-    RTermGame.println "Starting Gameoject"
+    RTermGame.println "Starting Gameobject"
   end
 
   def update

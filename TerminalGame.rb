@@ -5,6 +5,7 @@
 require './RenderFactory.rb'
 require './RTermGame.rb'
 require './keypress.rb'
+require 'io/console'
 
 class TerminalGame
 
@@ -15,7 +16,7 @@ class TerminalGame
     @gameobjects = {}
     @logic_bits_start = {}
     @logic_bits_update = {}
-    @graphics_factory = RenderFactory.new(9,9)
+    @graphics_factory = RenderFactory.new(width,height)
   end
 
   def add_gameobject(gameobject_id, gameobject)
@@ -31,16 +32,23 @@ class TerminalGame
 
   #Start the game loop
  def begin_loop
+
+
    Keyboard.begin_key_record
+
+   Thread.list.each do |thread|
+     puts thread
+  end
+  sleep(1)
    @gameobjects.each do |id, gameobject|
      gameobject.start
    end
      @logic_bits_start.each do |id, logic_bit|
        logic_bit.call
    end
+   begin
    loop do
      sleep (0.1)
-
 
      @gameobjects.each do |id, gameobject|
        gameobject.update
@@ -59,8 +67,17 @@ class TerminalGame
      @graphics_factory.draw
 
      Keyboard.reset_key_record
-
    end
+ rescue Exception => e
+   time = Time.now
+   RTermGame.println "\'#{@game_name}' ran into an exception during the game loop"
+   RTermGame.println "Error Report Generated " + time.inspect
+   RTermGame.println "==[Details]=============================================="
+   RTermGame.println e.inspect
+   RTermGame.println "==[Backtrace]=============================================="
+   RTermGame.println e.backtrace.join("")
+   quit_game "Exception Quit"
+ end
  end
 
   def get_width
@@ -73,6 +90,13 @@ class TerminalGame
 
   def get_name
     return @game_name
+  end
+
+  def quit_game(quit_code)
+    STDIN.cooked!
+    puts quit_code
+    Keyboard.end_thread
+    exit
   end
 
 end

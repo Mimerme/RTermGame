@@ -9,12 +9,25 @@ class PlayerObject < GameObject
   end
 
   def update
-    RTermGame.println "lmao"
-
     if(Keyboard.get_key_pressed "a")
-      RTermGame.println "a down"
-      @sprite="a"
+      if(@x - 1 >= 0)
+        @x-=1
+      end
+    end
+    if(Keyboard.get_key_pressed "d")
+      if(@x + 1 < @game_world.get_width)
+        @x+=1
+      end
+    end
+    if(Keyboard.get_key_pressed "w")
+      if(@y - 1 >= 0)
+        @y-=1
+      end
+    end
+    if(Keyboard.get_key_pressed "s")
+      if(@y + 1 <= @game_world.get_height)
+        @y+=1
+      end
     end
   end
-
 end

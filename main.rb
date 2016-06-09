@@ -17,9 +17,10 @@ require './RTermGame.rb'
 #meme = GameObject.new("O", 0, 0, nil)
 #dope = GameObject.new("I", 1, 0, nil)
 #kek = GameObject.new("E", 1, 1, nil)
-player = PlayerObject.new('U', 2, 2, nil)
 
-tetris = TerminalGame.new(:Tetris, 1, 2)
+tetris = TerminalGame.new(:Tetris, 20, 20)
+
+player = PlayerObject.new('U',3, 0, nil, tetris)
 
 
 tetris.add_gameobject(:player, player)

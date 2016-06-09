@@ -16,7 +16,7 @@ class RenderFactory
   end
 
   def buffer_at_position(x_pos, y_pos, sprite)
-    @screen_buffer[x_pos][y_pos] = sprite
+    @screen_buffer[y_pos][x_pos] = sprite
   end
 
   #dumps the current screen buffer
@@ -26,9 +26,12 @@ class RenderFactory
       buffer_x.each do |char_sprite|
         if char_sprite != :empty
           line_buffer << char_sprite
+        else
+          line_buffer << " "
         end
       end
       RTermGame.println line_buffer
+      @screen_buffer = Array.new(@size_y) {Array.new(@size_x) {:empty}}
     end
   end
 end

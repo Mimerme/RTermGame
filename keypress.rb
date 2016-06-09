@@ -5,21 +5,28 @@ require './RTermGame.rb'
 #hashmap of current keys down
 @@key_pressed = {}
 @@processed = false
+@@end_thread = false;
 
 class Keyboard
 #Attempt 3
 #---------
 #Nonblocking multithreaded cross-platform key-state recording
 def self.begin_key_record
-
   Thread.new{
     loop do
       char = read_char
       #RTermGame.println char
       @@key_pressed[char] = char
 
+      if(@@end_thread)
+        break
+      end
     end
   }
+end
+
+def self.end_thread
+  @@end_thread = true
 end
 
 def self.get_key_pressed(key)
