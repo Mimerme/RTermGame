@@ -14,8 +14,8 @@ class TerminalGame
     @game_width = width
     @game_height = height
     @gameobjects = {}
-    @logic_bits_start = {}
-    @logic_bits_update = {}
+    #@logic_bits_start = {}
+    #@logic_bits_update = {}
     @graphics_factory = RenderFactory.new(width,height)
   end
 
@@ -23,32 +23,43 @@ class TerminalGame
     @gameobjects[gameobject_id] = gameobject
   end
 
-  def add_logic(logic_id, logic_start, logic_update)
+  #def add_logic(logic_id, logic_start, logic_update)
     #Only add the logic bits if they are defined
-    logic_start != nil ? @logic_bits_start[logic_id] = logic_start : :nothing
-    logic_update != nil ? @logic_bits_update[logic_id] = logic_update : :nothing
+  #  logic_start != nil ? @logic_bits_start[logic_id] = logic_start : :nothing
+  #  logic_update != nil ? @logic_bits_update[logic_id] = logic_update : :nothing
+  #end
+
+  #methods to be overriden by the superclass
+  #called when the game starts
+  def loop_start
   end
 
+  #called at the beginning of each game loop
+  def loop_update_begin
+  end
+
+  #called at the end of each game loop
+ def loop_update_end
+ end
 
   #Start the game loop
  def begin_loop
 
 
    Keyboard.begin_key_record
-
-   Thread.list.each do |thread|
-     puts thread
-  end
-  sleep(1)
    @gameobjects.each do |id, gameobject|
      gameobject.start
    end
-     @logic_bits_start.each do |id, logic_bit|
-       logic_bit.call
-   end
+   #@logic_bits_start.each do |id, logic_bit|
+   #    logic_bit.call
+   #end
+
+   loop_start
+
    begin
    loop do
      sleep (0.1)
+     loop_update_begin
 
      @gameobjects.each do |id, gameobject|
        gameobject.update
@@ -60,9 +71,11 @@ class TerminalGame
        @graphics_factory.buffer_at_position(gameobject.get_x, gameobject.get_y, gameobject.get_sprite)
      end
 
-     @logic_bits_update.each do |id, logic_bit|
-       logic_bit.call
-     end
+     #@logic_bits_update.each do |id, logic_bit|
+    #   logic_bit.call
+    # end
+
+     loop_update_end
 
      @graphics_factory.draw
 

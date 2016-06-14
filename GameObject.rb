@@ -24,6 +24,14 @@ class GameObject
     return @y
   end
 
+  def set_x(val_x)
+    @x = val_x
+  end
+
+  def set_y(val_y)
+    @y = val_y
+  end
+
   def get_sprite
     return @sprite
   end

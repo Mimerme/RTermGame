@@ -6,9 +6,6 @@ require './GameObject'
 require './PlayerObject'
 require './TerminalGame'
 require './keypress'
-require 'io/console'
-require 'timeout'
-require 'curses'
 require './RTermGame.rb'
 
 #Terminal Game only acceptes tile based gameass GameObject
