@@ -11,6 +11,7 @@ class Tetromono
     @x = position_x
     @y = position_y
     @game_world = game_world
+    @falling = true
 
     #rotation key
     #===========
@@ -21,10 +22,19 @@ class Tetromono
     set_tetromono
   end
 
+  def get_tet_pieces
+    return @tet_pieces
+  end
+
   def add_pieces_to_buffer
     @tet_pieces.each do |id, piece|
-      @game_world.add_gameobject(id, piece)
+      @game_world.add_gameobject(piece)
     end
+  end
+
+  #called when the pieces touch the ground
+  def release_pieces
+    @game_world.release_active
   end
 
   def set_tetromono
@@ -39,8 +49,26 @@ class Tetromono
   end
 
   def apply_gravity_step
+    if !@falling
+      return
+    end
+
     @tet_pieces.each do |id, piece|
-      piece.set_y(piece.get_y + 1)
+
+      if (piece.get_y + 1) >= @game_world.get_height
+        release_pieces
+        @falling = false
+        return
+      end
+      puts @game_world.get_gameobject_at(9, 5)
+      if @game_world.get_gameobject_at(piece.get_x, piece.get_y) != :none
+        release_pieces
+        @falling = false
+        return
+      end
+    end
+    @tet_pieces.each do |id, piece|
+        piece.set_y(piece.get_y + 1)
     end
   end
 end

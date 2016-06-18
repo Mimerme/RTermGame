@@ -7,6 +7,7 @@ require './RTermGame.rb'
 require './keypress.rb'
 require 'io/console'
 
+
 class TerminalGame
 
   def initialize(name, width, height)
@@ -17,12 +18,14 @@ class TerminalGame
     #@logic_bits_start = {}
     #@logic_bits_update = {}
     @graphics_factory = RenderFactory.new(width,height)
+    @gameobject_count = 0
   end
 
-  def add_gameobject(gameobject_id, gameobject)
-    @gameobjects[gameobject_id] = gameobject
-  end
 
+  def add_gameobject(gameobject)
+    @gameobjects[@gameobject_count] = gameobject
+    @gameobject_count+=1
+  end
   #def add_logic(logic_id, logic_start, logic_update)
     #Only add the logic bits if they are defined
   #  logic_start != nil ? @logic_bits_start[logic_id] = logic_start : :nothing
@@ -81,6 +84,8 @@ class TerminalGame
 
      Keyboard.reset_key_record
    end
+ rescue SystemExit
+   puts "Terminated Safely"
  rescue Exception => e
    time = Time.now
    RTermGame.println "\'#{@game_name}' ran into an exception during the game loop"
@@ -110,6 +115,15 @@ class TerminalGame
     puts quit_code
     Keyboard.end_thread
     exit
+  end
+  def get_gameobject_at(x_pos, y_pos)
+    @gameobjects.each do |id, gameobject|
+      if(gameobject.get_x == x_pos && gameobject.get_y == y_pos)
+        return gameobject
+      else
+        return :none
+      end
+    end
   end
 
 end

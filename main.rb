@@ -17,11 +17,14 @@ require './RTermGame.rb'
 
 tetris = TerminalGame.new(:Tetris, 20, 20)
 
-player = PlayerObject.new('U',3, 0, nil, tetris)
+player = PlayerObject.new('U',0, 0, nil, tetris)
 
 
-tetris.add_gameobject(:player, player)
+tetris.add_gameobject(player)
 #tetris.add_gameobject(:test, dope)
 #tetris.add_gameobject(:pepe, kek)
+
+puts tetris.get_gameobject_at(player.get_x, player.get_y)
+sleep(1)
 
 tetris.begin_loop
