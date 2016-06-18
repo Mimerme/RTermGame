@@ -16,3 +16,5 @@ Gameobjects.
 
 - Game Quit : *MUST* be called before ending the game. RTermGame spawns a seperate keyboard listening thread, which must be terminated by calling quit_game in TerminalGame.rb. Alsok resets the terminal back into cooked mode and allows for echoing (things that RTermGame does internally to capture keyboard presses)
 
+##Stopped Dev.
+Mainly cause Ruby is a pass by value language instead of pass by reference. My brain hurts. Cool language, not good for OOP
